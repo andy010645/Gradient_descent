@@ -4,6 +4,7 @@ import numpy as np
 import random as random
 import csv
 import time
+
 #create some data
 x_data=[338, 333, 328, 207, 226, 25, 179, 60, 208, 606]
 
