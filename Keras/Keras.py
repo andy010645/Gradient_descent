@@ -2,7 +2,7 @@ import numpy as np
 from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation
 from keras.layers import Conv2D, MaxPooling2D, Flatten
-from keras.losses import CategoricalCrossentropy
+from keras.losses import categorical_crossentropy
 from keras.optimizers import SGD, Adam
 from keras.utils import np_utils
 from keras.datasets import mnist
@@ -28,13 +28,15 @@ def load_data():
 (x_train,y_train),(x_test,y_test)=load_data()
 
 model=Sequential()
-model.add(Dense(input_dim=28*28,units=633,activation='sigmoid'))
-model.add(Dense(units=633,activation='sigmoid'))
+model.add(Dense(input_dim=28*28,units=633,activation='relu'))
+model.add(Dense(units=633,activation='relu'))
 model.add(Dense(units=10,activation='softmax'))
 
-model.compile(loss=CategoricalCrossentropy(),optimizer='Adam',metrics=['accuracy'])
+model.compile(loss=categorical_crossentropy,optimizer='Adam',metrics=['accuracy'])
 
 model.fit(x_train,y_train,batch_size=100,epochs=30)
 
 result=model.evaluate(x_test,y_test)
+test=model.evaluate(x_train,y_train)
+print("\nTrain Loss",test[0],"\nTrain ACC",test[1])
 print("\nLoss:",result[0],"\nTest ACC",result[1])
