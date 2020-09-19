@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np 
 import random as random
 import csv
-
+import time
 #create some data
 x_data=[338, 333, 328, 207, 226, 25, 179, 60, 208, 606]
 
@@ -22,6 +22,9 @@ for i in range(len(x)):
          for n in range(len(x_data)):
             Z[j][i] = Z[j][i] +  (y_data[n] - b - w*x_data[n])**2
             Z[j][i] = Z[j][i]/len(x_data)
+            print(Z)
+            #time.sleep(3)
+            
 
 #initial weight and bias
 b=-120
@@ -31,7 +34,6 @@ iteration=100000
 
 b_history=[b]
 w_history=[w]
-
 lr_b=0.0
 lr_w=0.0
 
@@ -44,7 +46,7 @@ for i in range(iteration):
     for n in range(len(x_data)):
 
         # L(w,b)對b偏微分
-        b_grad = b_grad -2.0*(y_data[n] - b - w*x_data[n])*1.0
+        b_grad = b_grad -2.0*(y_data[n] - b - w*x_data[n])
         # L(w,b)對w偏微分
         w_grad = w_grad -2.0*(y_data[n] - b - w*x_data[n])*x_data[n]
         
@@ -63,7 +65,7 @@ for i in range(iteration):
 #plot the figure
 
  
-plt.contourf(x,y,Z, 50, alpha=0.5, cmap=plt.get_cmap('jet'))    
+plt.contourf(x,y,Z, 50, alpha=0.5,cmap=plt.get_cmap('jet'))    
 plt.plot([-188.4], [2.67], 'x', ms=12, markeredgewidth=3, color='orange')
 plt.plot(b_history, w_history, 'o-', ms=3, lw=1.5, color='black')
 plt.xlim(-200,-100)
