@@ -22,6 +22,9 @@ def load_data():
 
     x_train=x_train/255
     x_test=x_test/255
+    
+    x_test=np.random.normal(x_test)
+
     return (x_train,y_train),(x_test,y_test)
 
 
@@ -29,7 +32,9 @@ def load_data():
 
 model=Sequential()
 model.add(Dense(input_dim=28*28,units=633,activation='relu'))
+model.add(Dropout(0.7))
 model.add(Dense(units=633,activation='relu'))
+model.add(Dropout(0.7))
 model.add(Dense(units=10,activation='softmax'))
 
 model.compile(loss=categorical_crossentropy,optimizer='Adam',metrics=['accuracy'])
